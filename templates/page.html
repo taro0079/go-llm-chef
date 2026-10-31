@@ -11,33 +11,67 @@
   </head>
   
   <body>
-    
-    <h1>My GPT Chef</h1>
-    
-    <label for="result">材料</label>
-    
-    <div hx-get="/ingredients" hx-trigger="load" id="result" hx-indicator="#loading" name="result"></div>
+    <div class="container">
+      <h1>My GPT Chef</h1>
+      <label for="result">材料</label>
+      <div hx-get="/ingredients" hx-trigger="load" id="result" hx-indicator="#loading" name="result"></div>
+      <form
+        class="ask-form"
+        hx-post="/ask"
+        hx-target="#llm-result"
+        hx-swap="innerHTML"
+        hx-indicator="#loading"
+      >
+        <div id="method">
+          <fieldset>
+            <legend>調理方法</legend>
+            <div>
+              <label for="grill">焼く</label>
+              <input type="radio" name="method" value="grill" id="grill">
+            </div>
+            <div>
+              <label for="fry">炒める</label>
+              <input type="radio" name="method" value="fry" id="fry">
+            </div>
+            <div>
+              <label for="boiling">煮る</label>
+              <input type="radio" name="method" value="boiling" id="boiling">
+            </div>
+            <div>
+              <label for="none">指定しない</label>
+              <input type="radio" name="method" value="none" id="none">
+            </div>
+          </fieldset>
+        </div>
 
-    <form
-      hx-post="/ask"
-      hx-target="#llm-result"
-      hx-swap="innerHTML"
-      hx-indicator="#loading"
-    >
-      <div id="method">
-        <label for="method">調理方法</label>
-        <select id="method" name="method">
-          <option value="hotcook">ホットクック</option>
-          <option value="microwave">電子レンジ</option>
-          <option value="pan">フライパン</option>
-        </select>
-      </div>
-      <button type="submit">ASK</button>
+        <div id="facility">
+          <fieldset>
+          <legend>調理器具</legend>
+            <div>
+              <label for="hotcook">ホットクック</label>
+              <input type="radio" name="facility" value="hotcook" id="hotcook">
+            </div>
+            <div>
+              <label for="microwave">電子レンジ</label>
+              <input type="radio" name="facility" value="microwave" id="microwave">
+            </div>
+            <div>
+              <label for="pan">フライパン</label>
+              <input type="radio" name="facility" value="pan" id="pan">
+            </div>
+            <div>
+              <label for="none">指定しない</label>
+              <input type="radio" name="facility" value="none" id="none">
+            </div>
+          </fieldset>
+        </div>
+        <button type="submit">ASK</button>
       
-    </form>
+      </form>
     
-    <div id="loading" class="spinner"></div>
+      <div id="loading" class="spinner"></div>
     
-    <div id="llm-result"></div>
+      <div id="llm-result"></div>
+    </div> 
   </body>
 </html>

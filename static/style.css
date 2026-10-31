@@ -1,16 +1,15 @@
 body {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 24px;
-    font-family: sans-serif;
-    line-height: 1.6;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: sans-serif;
+  line-height: 1.6;
 }
-.ask-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
+
+.ask-form > * + * {
+  margin-top: 8px;
 }
+
 .spinner {
   display: none;
   width: 24px;
@@ -26,35 +25,51 @@ body {
     transform: rotate(360deg);
   }
 }
+
 .spinner.htmx-request {
   display: inline-block;
 }
 
 button {
-    padding: 8px 16px;
-    cursor: pointer;
+  padding: 8px 16px;
+  cursor: pointer;
 }
 
 #ingredients {
-    list-style: none;
+  list-style: none;
 }
-#ingredients > li,
+
+#ingredients>li,
 #new-ingredient form {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
 #new-ingredient form {
-    width: 100%;
+  width: 100%;
 }
 
 #ingredients input {
-    flex: 1;
-    min-width: 0;
+  flex: 1;
+  min-width: 0;
 }
 
 #llm-result {
-    margin-top: 24px;
-    overflow-wrap: anywhere;
+  margin-top: 24px;
+  overflow-wrap: anywhere;
 }
+
+.ask-button {
+  padding: 12px 24px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+

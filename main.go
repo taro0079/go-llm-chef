@@ -24,6 +24,7 @@ import (
 type Prompt struct {
 	Ingredients string
 	Method      string
+	Facility    string
 }
 
 //go:embed templates/* static/*
@@ -126,12 +127,28 @@ func newHandler(repo *repository.IngredientRepository, client openai.Client) htt
 	})
 
 	mux.HandleFunc("POST /ask", func(w http.ResponseWriter, r *http.Request) {
-		methodMap := map[string]string{
+		facilityMap := map[string]string{
 			"microwave": "電子レンジ",
 			"pan":       "フライパン",
 			"hotcook":   "ホットクック",
+			"none":      "指定しない",
+		}
+		methodMap := map[string]string{
+			"grill":   "焼く",
+			"fry":     "炒める",
+			"boiling": "煮る",
+			"none":    "指定しない",
 		}
 		cookMethod := methodMap[r.FormValue("method")]
+
+		if cookMethod == "" {
+			log.Fatal("指定した調理方法は定義されていません。")
+		}
+		cookFacility := facilityMap[r.FormValue("facility")]
+
+		if cookFacility == "" {
+			log.Fatal("指定した調理器具は定義されていません。")
+		}
 
 		ings, err := repo.FindAll(r.Context())
 		if err != nil {
@@ -150,6 +167,7 @@ func newHandler(repo *repository.IngredientRepository, client openai.Client) htt
 		data := Prompt{
 			Ingredients: joined,
 			Method:      cookMethod,
+			Facility:    cookFacility,
 		}
 
 		var buf bytes.Buffer
