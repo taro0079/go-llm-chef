@@ -12,6 +12,8 @@ RUN go build -trimpath -ldflags="-s -w" -o /out/go-llm-chef .
 
 FROM debian:bookworm-slim
 
+LABEL org.opencontainers.image.source="https://github.com/taro0079/go-llm-chef"
+
 # HTTPS certificates are needed for requests to the OpenAI API.
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates \

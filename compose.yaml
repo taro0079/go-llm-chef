@@ -1,10 +1,8 @@
-# Raspberry Pi上で実行: docker compose up -d --build
+# Raspberry Pi上で実行: docker compose pull && docker compose up -d --no-build
 # .env に OPENAI_API_KEY を設定してください（.env.example を参照）。
 services:
   app:
-    build:
-      context: .
-    # platformを固定せず、実行するPiのアーキテクチャでビルドします。
+    image: ${IMAGE_NAME:-ghcr.io/taro0079/go-llm-chef}:${IMAGE_TAG:-latest}
     ports:
       - "8080:8080"
     environment:
