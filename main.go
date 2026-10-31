@@ -175,7 +175,7 @@ func (r *IngredientRepository) Delete(ctx context.Context, id int) error {
 
 func main() {
 	err := godotenv.Load()
-	if err != nil {
+	if err != nil && !os.IsNotExist(err) {
 		log.Fatal(err)
 	}
 

@@ -1,0 +1,19 @@
+# Raspberry Pi上で実行: docker compose up -d --build
+# .env に OPENAI_API_KEY を設定してください（.env.example を参照）。
+services:
+  app:
+    build:
+      context: .
+    # platformを固定せず、実行するPiのアーキテクチャでビルドします。
+    ports:
+      - "8080:8080"
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:?Set OPENAI_API_KEY in .env}
+    volumes:
+      - app-data:/data
+    restart: unless-stopped
+
+# app.dbはコンテナの再作成後も保持されます。
+# docker compose down -v はDBも削除するため注意してください。
+volumes:
+  app-data:
