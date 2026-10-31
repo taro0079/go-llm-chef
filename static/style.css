@@ -1,3 +1,10 @@
+body {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 24px;
+    font-family: sans-serif;
+    line-height: 1.6;
+}
 .ask-form {
   display: flex;
   flex-direction: column;
@@ -21,4 +28,33 @@
 }
 .spinner.htmx-request {
   display: inline-block;
+}
+
+button {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+#ingredients {
+    list-style: none;
+}
+#ingredients > li,
+#new-ingredient form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+#new-ingredient form {
+    width: 100%;
+}
+
+#ingredients input {
+    flex: 1;
+    min-width: 0;
+}
+
+#llm-result {
+    margin-top: 24px;
+    overflow-wrap: anywhere;
 }
