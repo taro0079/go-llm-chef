@@ -1,0 +1,62 @@
+
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>LLM Chef</title>
+  <script src="https://unpkg.com/htmx.org@4.0/dist/htmx.min.js" defer></script>
+
+</head>
+<body>
+<h1>My GPT Chef</h1>
+<label for="result">材料</label>
+<div hx-get="/ingredients" hx-trigger="load" id="result" hx-indicator="#loading" name="result"></div>
+
+<form
+  hx-post="/ask"
+  hx-target="#llm-result"
+  hx-swap="innerHTML"
+  hx-indicator="#loading"
+
+>
+<div id="method">
+<label for="method">調理方法</label>
+<select id="method" name="method">
+  <option value="hotcook">ホットクック</option>
+  <option value="microwave">電子レンジ</option>
+  <option value="pan">フライパン</option>
+</select>
+</div>
+<button type="submit">ASK</button>
+</form>
+<div id="loading" class="spinner"></div>
+<div id="llm-result">
+</div>
+</body>
+<style>
+.ask-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+.spinner {
+  display: none;
+  width: 24px;
+  height: 24px;
+  border: 3px solid #ddd;
+  border-top-color: #3498db;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spinner.htmx-request {
+  display: inline-block;
+}
+</style>
+</html>

@@ -1,0 +1,18 @@
+
+<ul id="ingredients">
+  {{range .}}{{template "ingredients" .}}{{end}}
+  <li id="new-ingredient">
+    <form hx-post="/ingredients" hx-target="#result" hx-swap="innerHTML">
+      <input name="name">
+      <button type="submit">Add</button>
+    </form>
+  </li>
+</ul>
+
+{{define "ingredients"}}
+<li id="ingredient-{{.ID}}">
+  <input id="ingredient-{{.ID}}" value="{{.Name}}">
+  <button type="button" hx-delete="/ingredients/{{.ID}}" hx-target="#result" hx-swap="innerHTML">x</button>
+</li>
+{{end}}
+

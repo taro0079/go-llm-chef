@@ -8,6 +8,8 @@ ENV CGO_ENABLED=1
 COPY go.mod go.sum ./
 RUN go mod download
 COPY main.go ./
+COPY internal/ ./internal/
+COPY templates/ ./templates/
 RUN go build -trimpath -ldflags="-s -w" -o /out/go-llm-chef .
 
 FROM debian:bookworm-slim
