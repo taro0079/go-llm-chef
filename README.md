@@ -85,3 +85,16 @@ docker compose up -d --no-build
 SQLiteの `app.db` は `app-data` ボリュームに永続化されます。同じディレクトリで更新を実行してください。`docker compose down -v` はDBも削除します。
 
 参考: [Dockerのマルチプラットフォームビルド](https://docs.docker.com/build/building/multi-platform/)、[GHCRの認証と公開設定](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)。
+
+## テスト
+
+Go（バージョンは `go.mod` を参照）と、SQLiteのCGOビルドに必要なCコンパイラを用意して実行します。
+
+```sh
+go test ./...
+
+# race検出とカバレッジの確認
+go test -race -cover ./...
+```
+
+食材の保存・取得・削除、HTTPレスポンス、レシピ生成のAPIリクエストとMarkdown表示、DB・APIのエラー応答を検証します。テストごとに独立したインメモリSQLiteを使い、OpenAI APIへの通信は模擬応答に置き換えています。APIキーや `.env` は不要で、既存の `app.db` は変更しません。
