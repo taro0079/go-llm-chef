@@ -7,3 +7,5 @@
 !templates/**
 !internal/
 !internal/**
+!static/
+!static/**

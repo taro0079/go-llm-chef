@@ -26,7 +26,7 @@ type Prompt struct {
 	Method      string
 }
 
-//go:embed templates/*
+//go:embed templates/* static/*
 var templateFiles embed.FS
 
 var pageTmpl = template.Must(template.ParseFS(templateFiles, "templates/page.html"))
@@ -70,6 +70,8 @@ func main() {
 
 func newHandler(repo *repository.IngredientRepository, client openai.Client) http.Handler {
 	mux := http.NewServeMux()
+	mux.Handle("GET /static/", http.FileServerFS(templateFiles))
+
 	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
 		ings, err := repo.FindAll(r.Context())
 		if err != nil {
