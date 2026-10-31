@@ -1,7 +1,7 @@
 
 <!doctype html>
 <html lang="ja">
-  
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +9,7 @@
     <script src="https://unpkg.com/htmx.org@4.0/dist/htmx.min.js" defer></script>
     <link rel="stylesheet" href="/static/style.css">
   </head>
-  
+
   <body>
     <div class="container">
       <h1>My GPT Chef</h1>
@@ -39,7 +39,7 @@
             </div>
             <div>
               <label for="none">指定しない</label>
-              <input type="radio" name="method" value="none" id="none">
+              <input type="radio" name="method" value="none" id="none" checked>
             </div>
           </fieldset>
         </div>
@@ -61,17 +61,17 @@
             </div>
             <div>
               <label for="none">指定しない</label>
-              <input type="radio" name="facility" value="none" id="none">
+              <input type="radio" name="facility" value="none" id="none" checked>
             </div>
           </fieldset>
         </div>
-        <button type="submit">ASK</button>
-      
+        <button type="submit" class="ask-button">ASK</button>
+
       </form>
-    
+
       <div id="loading" class="spinner"></div>
-    
+
       <div id="llm-result"></div>
-    </div> 
+    </div>
   </body>
 </html>
