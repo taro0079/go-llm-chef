@@ -38,13 +38,34 @@ var pageTmpl = template.Must(template.New("page").Parse(`
 
 </head>
 <body>
-<h1>Items</h1>
-<div hx-get="/ingredients" hx-trigger="load" id="result"></div>
+<h1>Ingredients</h1>
+<div hx-get="/ingredients" hx-trigger="load" id="result" hx-indicator="#loading"></div>
+<div id="loading" class="spinner"></div>
 <div id="llm-result">
 </div>
-<button hx-post="/ask" hx-target="#llm-result" hx-swap="innerHTML">ASK</button>
+<button hx-post="/ask" hx-target="#llm-result" hx-swap="innerHTML" hx-indicator="#loading">ASK</button>
 
 </body>
+<style>
+.spinner {
+  display: none;
+  width: 24px;
+  height: 24px;
+  border: 3px solid #ddd;
+  border-top-color: #3498db;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spinner.htmx-request {
+  display: inline-block;
+}
+</style>
 </html>
 `))
 
